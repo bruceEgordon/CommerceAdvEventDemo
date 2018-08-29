@@ -1,0 +1,20 @@
+﻿@using CommerceTraining.SupportingClasses
+
+@model NodeEntryCombo
+
+<div>
+    <ul title="Catalog Entries" >
+        @foreach(NameAndUrls item in Model.entries)
+        {
+            <li><a href="@item.url">@item.name</a><img src="@item.imageThumbUrl" /></li>
+        }
+    </ul>
+</div>
+<div>
+    <ul title="Catalog Nodes">
+        @foreach (NameAndUrls item in Model.nodes)
+        {
+            <li><a href="@item.url">@item.name</a><img src="@item.imageThumbUrl" /></li>
+        }
+    </ul>
+</div>
