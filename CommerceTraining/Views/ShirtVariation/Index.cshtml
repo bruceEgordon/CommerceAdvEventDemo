@@ -38,3 +38,14 @@
         </div>
     }
 </div>
+<div>
+    @using (Html.BeginForm("DoLowLevelDtoEdit", "ShirtVariation"))
+    {
+        <div>
+            New main body text: <input type="text" name="newText" />
+        </div>
+        <div>
+            <input type="submit" value="Dto Change Text" />
+        </div>
+    }
+</div>

@@ -13,9 +13,13 @@ using EPiServer.Core;
 using EPiServer.Framework.DataAnnotations;
 using EPiServer.Globalization;
 using EPiServer.Security;
+using EPiServer.ServiceLocation;
 using EPiServer.Web.Mvc;
 using EPiServer.Web.Routing;
+using Mediachase.Commerce.Catalog;
 using Mediachase.Commerce.Security;
+using Mediachase.MetaDataPlus;
+using Mediachase.MetaDataPlus.Configurator;
 
 namespace CommerceTraining.Controllers
 {
@@ -83,6 +87,19 @@ namespace CommerceTraining.Controllers
         public void AddToWishList(ShirtVariation currentContent)
         {
 
+        }
+
+        public ActionResult DoLowLevelDtoEdit(ShirtVariation currentContent, string newText)
+        {
+            //Old school way to change using Dtos directly
+            var catSystem = ServiceLocator.Current.GetInstance<ICatalogSystem>();
+            var shirtDto = catSystem.GetCatalogEntryDto(currentContent.Code);
+            var entryRow = shirtDto.CatalogEntry.First();
+            MetaObject metaObject = MetaObject.Load(MetaDataContext.Instance, entryRow.CatalogEntryId, entryRow.MetaClassId);
+            metaObject["MainBody"] = newText;
+            metaObject.AcceptChanges(MetaDataContext.Instance);
+
+            return RedirectToAction("Index");
         }
     }
 }
