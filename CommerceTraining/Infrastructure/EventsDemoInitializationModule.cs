@@ -95,7 +95,8 @@ namespace CommerceTraining.Infrastructure
             string mydocPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (lines != null && lines.Count > 0)
             {
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(mydocPath, "EventsDemo.txt"), true))
+                using (StreamWriter outputFile = 
+                    new StreamWriter(Path.Combine(mydocPath, "EventsDemo.txt"), true))
                 {
                     foreach (string line in lines)
                     {
